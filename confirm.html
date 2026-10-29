@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Confirming… — Every Verse Painted</title>
+  <link rel="canonical" href="https://everyversepainted.com/confirm.html">
+  <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#14110f;color:#ede4d3;font-family:"Palatino Linotype",Palatino,Georgia,serif;font-size:1.2rem;text-align:center;padding:2rem}a{color:#f0c97c}</style>
+</head>
+<body>
+  <main>
+    <p>Confirming your subscription&hellip;</p>
+    <noscript><p>Please enable JavaScript to confirm, or <a href="/">return to Every Verse Painted</a>.</p></noscript>
+  </main>
+  <script>
+    // Hands the signed token from the email link to the signup Worker, which verifies it,
+    // adds the subscriber, and redirects to /confirmed.html.
+    const t = new URLSearchParams(location.search).get("t");
+    location.replace(t
+      ? "https://everyversepainted-signup.sitequote-approval.workers.dev/api/confirm?t=" + encodeURIComponent(t)
+      : "/confirmed.html?status=expired");
+  </script>
+</body>
+</html>

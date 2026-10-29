@@ -143,7 +143,8 @@ async function subscribe(request, env) {
 
   const ttlMs = Number(env.CONFIRM_TTL_HOURS || 48) * 3600 * 1000;
   const token = await signToken(email, Date.now() + ttlMs, env.SIGNING_SECRET);
-  const link = `${new URL(request.url).origin}/api/confirm?t=${encodeURIComponent(token)}`;
+  // The email links to the site (not the workers.dev host); confirm.html forwards the token here.
+  const link = `${env.SITE_ORIGIN}/confirm.html?t=${encodeURIComponent(token)}`;
   const { text, html } = confirmEmail(link);
 
   const r = await fetch("https://api.resend.com/emails", {
