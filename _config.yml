@@ -1,0 +1,4 @@
+exclude:
+  - worker
+  - README.md
+  - AGENTS.md
