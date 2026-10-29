@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Every Verse Painted — The King James Bible, painted and narrated</title>
+  <meta name="description" content="Every verse of the King James Bible, painted, animated and narrated word for word. Nothing added, nothing left out. Beginning with Genesis and the Christmas story in Luke.">
+  <link rel="canonical" href="https://everyversepainted.com/">
+  <meta name="theme-color" content="#14110f">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Every Verse Painted">
+  <meta property="og:title" content="Every Verse Painted — The King James Bible, painted and narrated">
+  <meta property="og:description" content="Every verse of the King James Bible, painted, animated and narrated word for word. Nothing added, nothing left out.">
+  <meta property="og:url" content="https://everyversepainted.com/">
+  <meta property="og:image" content="https://everyversepainted.com/assets/img/og-1200x630.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Golden light bursting through dark clouds over a primordial ocean, with the title Every Verse Painted">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="/assets/img/hero-1280.jpg" imagesrcset="/assets/img/hero-1280.jpg 1280w, /assets/img/hero-2400.jpg 2400w" imagesizes="100vw">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://everyversepainted.com/#org",
+        "name": "Every Verse Painted",
+        "url": "https://everyversepainted.com/",
+        "logo": "https://everyversepainted.com/assets/img/apple-touch-icon.png",
+        "sameAs": ["https://www.youtube.com/@EveryVersePainted"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://everyversepainted.com/#website",
+        "name": "Every Verse Painted",
+        "url": "https://everyversepainted.com/",
+        "publisher": {"@id": "https://everyversepainted.com/#org"}
+      },
+      {
+        "@type": "CreativeWorkSeries",
+        "name": "Every Verse Painted: The King James Bible",
+        "description": "Every verse of the King James Bible, painted, animated and narrated word for word.",
+        "inLanguage": "en",
+        "creator": {"@id": "https://everyversepainted.com/#org"}
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #14110f;
+      --bg-raised: #1d1916;
+      --ink: #ede4d3;
+      --ink-soft: #b8ada0;
+      --gold: #d4a55c;
+      --gold-bright: #f0c97c;
+      --rule: rgba(212, 165, 92, 0.28);
+      --display: "Cormorant Garamond", "Palatino Linotype", Palatino, Georgia, serif;
+      --body: "EB Garamond", "Palatino Linotype", Palatino, Georgia, serif;
+      --measure: 38rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--body); font-size: 1.2rem; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--gold-bright); }
+    a:focus-visible, .btn:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+
+    /* Hero: the painting is the page. */
+    .hero {
+      position: relative; min-height: 92vh; display: grid; place-items: center;
+      text-align: center; padding: 6rem 1.25rem 4rem; overflow: hidden; isolation: isolate;
+    }
+    .hero img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      object-position: 50% 35%; z-index: -2;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: radial-gradient(ellipse at 50% 55%, rgba(20,17,15,0.35) 0%, rgba(20,17,15,0.7) 70%),
+                  linear-gradient(to bottom, rgba(20,17,15,0) 60%, var(--bg) 100%);
+    }
+    .eyebrow {
+      font-family: var(--body); letter-spacing: 0.32em; text-transform: uppercase;
+      font-size: 0.8rem; color: var(--gold-bright); margin: 0 0 1rem;
+    }
+    h1 {
+      font-family: var(--display); font-weight: 600; margin: 0;
+      font-size: clamp(3rem, 9vw, 6.5rem); line-height: 1; letter-spacing: 0.01em;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+    }
+    .tagline {
+      font-style: italic; font-size: clamp(1.2rem, 2.6vw, 1.6rem); color: var(--ink);
+      max-width: 34rem; margin: 1.25rem auto 2.25rem; text-shadow: 0 1px 12px rgba(0,0,0,0.7);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none;
+      font-family: var(--body); font-size: 1.1rem; padding: 0.85rem 1.6rem; border-radius: 999px;
+      border: 1px solid var(--gold); color: var(--bg); background: var(--gold);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover { background: var(--gold-bright); transform: translateY(-1px); }
+    .btn svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--rule); }
+    .btn-ghost:hover { background: rgba(212,165,92,0.12); }
+    .cta-row { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
+
+    section { padding: 5.5rem 1.25rem; }
+    .wrap { max-width: 68rem; margin: 0 auto; }
+    .prose { max-width: var(--measure); margin: 0 auto; }
+    h2 {
+      font-family: var(--display); font-weight: 600; font-size: clamp(2.1rem, 4.5vw, 3rem);
+      line-height: 1.1; margin: 0 0 1.25rem; text-align: center;
+    }
+    .rule { width: 4rem; height: 1px; background: var(--gold); margin: 0 auto 2.5rem; border: 0; }
+    .lede { font-size: 1.35rem; text-align: center; color: var(--ink); }
+
+    /* The promise: three pillars. */
+    .pillars { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 3rem; }
+    .pillar h3 { font-family: var(--display); font-size: 1.9rem; font-weight: 600; margin: 0 0 0.5rem; color: var(--gold-bright); }
+    .pillar p { margin: 0; color: var(--ink-soft); }
+
+    /* Gallery: each painting with the verse it illustrates. */
+    .gallery { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); margin-top: 3rem; }
+    .gallery figure { margin: 0; background: var(--bg-raised); border-radius: 6px; overflow: hidden; }
+    .gallery img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+    .gallery figcaption { padding: 1rem 1.2rem 1.3rem; font-style: italic; color: var(--ink); }
+    .gallery cite { display: block; font-style: normal; font-size: 0.9rem; letter-spacing: 0.08em; color: var(--gold); margin-top: 0.35rem; }
+
+    /* Coming first. */
+    .first { background: var(--bg-raised); }
+    .cards { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); margin-top: 2.5rem; }
+    .card { border: 1px solid var(--rule); border-radius: 6px; padding: 1.8rem; }
+    .card .when { font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .card h3 { font-family: var(--display); font-size: 2rem; font-weight: 600; margin: 0.4rem 0 0.6rem; }
+    .card p { margin: 0; color: var(--ink-soft); }
+
+    /* FAQ. */
+    details { border-bottom: 1px solid var(--rule); padding: 1.1rem 0; }
+    summary { cursor: pointer; font-family: var(--display); font-size: 1.5rem; font-weight: 600; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--gold); }
+    details[open] summary::after { content: "\2212"; }
+    details p { color: var(--ink-soft); margin: 0.8rem 0 0; }
+
+    .closing { text-align: center; }
+    .closing blockquote { font-family: var(--display); font-style: italic; font-size: clamp(1.6rem, 3.5vw, 2.3rem); line-height: 1.3; margin: 0 auto 2rem; max-width: 40rem; }
+    .closing blockquote cite { display: block; font-family: var(--body); font-style: normal; font-size: 1rem; letter-spacing: 0.1em; color: var(--gold); margin-top: 0.8rem; }
+
+    footer { border-top: 1px solid var(--rule); padding: 2.5rem 1.25rem 3rem; text-align: center; color: var(--ink-soft); font-size: 0.95rem; }
+    footer p { margin: 0.3rem 0; }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <img src="/assets/img/hero-1280.jpg"
+         srcset="/assets/img/hero-1280.jpg 1280w, /assets/img/hero-2400.jpg 2400w" sizes="100vw"
+         alt="Golden light bursting through dark clouds over a vast primordial ocean, painted in the style of a classical oil painting"
+         fetchpriority="high">
+    <div>
+      <p class="eyebrow">The King James Bible</p>
+      <h1>Every Verse Painted</h1>
+      <p class="tagline">Every word of Scripture, painted, animated and narrated. Nothing added. Nothing left out.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://www.youtube.com/@EveryVersePainted?sub_confirmation=1" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+          Subscribe on YouTube
+        </a>
+        <a class="btn btn-ghost" href="#paintings">See the paintings</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="promise">
+      <div class="wrap">
+        <h2>The whole Bible, as it was written</h2>
+        <hr class="rule">
+        <p class="lede prose">Every Verse Painted is bringing all 31,102 verses of the King James Bible to life, one chapter at a time, as classical oil paintings in motion. Not a retelling, not a summary: the text itself, word for word.</p>
+        <div class="pillars">
+          <div class="pillar">
+            <h3>Every word</h3>
+            <p>Each chapter is narrated in full from the King James Version. Every verse is checked against the text so nothing is skipped, reordered or embellished.</p>
+          </div>
+          <div class="pillar">
+            <h3>Painted</h3>
+            <p>Every scene is a painting in the tradition of classical history painting, then brought gently to life. Waves move, light breaks, the shepherds turn toward the angel.</p>
+          </div>
+          <div class="pillar">
+            <h3>Narrated</h3>
+            <p>One steady narrator carries the whole Bible, with distinct voices for those who speak: the angel, Mary, Simeon, and many more.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="paintings">
+      <div class="wrap">
+        <h2>In the beginning</h2>
+        <hr class="rule">
+        <p class="lede prose">Paintings from the first chapter of Genesis.</p>
+        <div class="gallery">
+          <figure>
+            <img src="/assets/img/001-let-there-be-light-800.jpg" srcset="/assets/img/001-let-there-be-light-800.jpg 800w, /assets/img/001-let-there-be-light-1600.jpg 1600w" sizes="(min-width: 68rem) 33vw, 100vw" loading="lazy" width="1600" height="892" alt="Light pouring out of dark clouds over the primordial ocean">
+            <figcaption>&ldquo;And God said, Let there be light: and there was light.&rdquo;<cite>GENESIS 1:3</cite></figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/img/002-the-heavens-800.jpg" srcset="/assets/img/002-the-heavens-800.jpg 800w, /assets/img/002-the-heavens-1600.jpg 1600w" sizes="(min-width: 68rem) 33vw, 100vw" loading="lazy" width="1600" height="892" alt="The Milky Way stretching across the night sky above quiet hills">
+            <figcaption>&ldquo;&hellip;he made the stars also.&rdquo;<cite>GENESIS 1:16</cite></figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/img/003-the-great-whales-800.jpg" srcset="/assets/img/003-the-great-whales-800.jpg 800w, /assets/img/003-the-great-whales-1600.jpg 1600w" sizes="(min-width: 68rem) 33vw, 100vw" loading="lazy" width="1600" height="892" alt="A humpback whale breaching from the ocean in golden light">
+            <figcaption>&ldquo;And God created great whales, and every living creature that moveth.&rdquo;<cite>GENESIS 1:21</cite></figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/img/004-the-peaceable-kingdom-800.jpg" srcset="/assets/img/004-the-peaceable-kingdom-800.jpg 800w, /assets/img/004-the-peaceable-kingdom-1600.jpg 1600w" sizes="(min-width: 68rem) 33vw, 100vw" loading="lazy" width="1600" height="892" alt="A lion resting peacefully among grazing sheep and deer in a sunlit meadow">
+            <figcaption>&ldquo;And God made the beast of the earth after his kind &hellip; and God saw that it was good.&rdquo;<cite>GENESIS 1:25</cite></figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/img/005-the-man-and-the-woman-800.jpg" srcset="/assets/img/005-the-man-and-the-woman-800.jpg 800w, /assets/img/005-the-man-and-the-woman-1600.jpg 1600w" sizes="(min-width: 68rem) 33vw, 100vw" loading="lazy" width="1600" height="892" alt="Adam and Eve seen from behind among tall ferns, looking out over a valley full of animals">
+            <figcaption>&ldquo;&hellip;male and female created he them.&rdquo;<cite>GENESIS 1:27</cite></figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/img/006-very-good-800.jpg" srcset="/assets/img/006-very-good-800.jpg 800w, /assets/img/006-very-good-1600.jpg 1600w" sizes="(min-width: 68rem) 33vw, 100vw" loading="lazy" width="1600" height="892" alt="A panorama of the new creation at golden evening: sea, mountains, rivers and herds">
+            <figcaption>&ldquo;And God saw every thing that he had made, and, behold, it was very good.&rdquo;<cite>GENESIS 1:31</cite></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="first" class="first">
+      <div class="wrap">
+        <h2>Coming first</h2>
+        <hr class="rule">
+        <div class="cards">
+          <div class="card">
+            <div class="when">The beginning</div>
+            <h3>Genesis</h3>
+            <p>From &ldquo;In the beginning&rdquo; through creation, the garden, the flood and the patriarchs, chapter by chapter.</p>
+          </div>
+          <div class="card">
+            <div class="when">This Christmas</div>
+            <h3>Luke 1 &amp; 2</h3>
+            <p>The angel Gabriel, Mary and Elisabeth, the birth in Bethlehem, the shepherds and the heavenly host, in time for Christmas.</p>
+          </div>
+        </div>
+        <p class="cta-row" style="margin-top: 2.5rem;">
+          <a class="btn" href="https://www.youtube.com/@EveryVersePainted?sub_confirmation=1" rel="noopener">Subscribe to follow along</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap prose">
+        <h2>Questions</h2>
+        <hr class="rule">
+        <details>
+          <summary>Which translation do you use?</summary>
+          <p>The King James Version (1769 standard text), which is in the public domain in the United States. Every chapter is narrated in full, exactly as written.</p>
+        </details>
+        <details>
+          <summary>Is this made with AI?</summary>
+          <p>Yes, in part. The paintings, animation and narration are created with the help of AI tools on our own hardware. Every chapter is then reviewed by hand, scene by scene, for faithfulness to the text. We catch things like a sun appearing before the fourth day, or anything that isn't in Scripture. The words are never generated: they are the King James text itself.</p>
+        </details>
+        <details>
+          <summary>How do you depict God?</summary>
+          <p>God is never shown as a human figure. His presence is shown as light, and His voice is heard. Jesus is shown as a person, as in the long tradition of Christian art, and angels appear as they do in classical paintings.</p>
+        </details>
+        <details>
+          <summary>Is it free?</summary>
+          <p>Yes. Every chapter is free to watch on YouTube.</p>
+        </details>
+        <details>
+          <summary>How long will the whole Bible take?</summary>
+          <p>The full King James Bible runs about 95 hours when narrated. We are releasing it chapter by chapter, starting with Genesis and the Christmas story in Luke.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap">
+        <blockquote>&ldquo;Thy word is a lamp unto my feet, and a light unto my path.&rdquo;<cite>PSALM 119:105</cite></blockquote>
+        <a class="btn" href="https://www.youtube.com/@EveryVersePainted?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Every Verse Painted</p>
+    <p>Scripture quotations from the King James Version (public domain).</p>
+    <p><a href="https://www.youtube.com/@EveryVersePainted" rel="noopener">YouTube</a></p>
+  </footer>
+</body>
+</html>
