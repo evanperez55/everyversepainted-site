@@ -166,6 +166,20 @@
     footer { border-top: 1px solid var(--rule); padding: 2.5rem 1.25rem 3rem; text-align: center; color: var(--ink-soft); font-size: 0.95rem; }
     footer p { margin: 0.3rem 0; }
 
+    /* Email signup. */
+    .signup { margin-top: 2rem; text-align: center; }
+    .signup-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .signup input[type=email] {
+      flex: 1 1 16rem; max-width: 24rem; font: inherit; font-size: 1.1rem; color: var(--ink);
+      background: var(--bg-raised); border: 1px solid var(--rule); border-radius: 999px; padding: 0.8rem 1.3rem;
+    }
+    .signup input[type=email]:focus { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+    .signup .cf-turnstile { display: flex; justify-content: center; margin-top: 1.1rem; min-height: 65px; }
+    .signup-status { min-height: 1.6em; margin: 0.8rem 0 0; color: var(--gold-bright); }
+    .signup button[disabled] { opacity: 0.6; cursor: wait; }
+    .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
   </style>
 </head>
@@ -268,6 +282,25 @@
       </div>
     </section>
 
+    <section id="updates">
+      <div class="wrap prose">
+        <h2>Be the first to watch</h2>
+        <hr class="rule">
+        <p class="lede">Get an email when each new chapter is released. No spam, and you can unsubscribe with one click.</p>
+        <form class="signup" id="signup" data-endpoint="__WORKER_URL__/api/subscribe" novalidate>
+          <label class="sr-only" for="signup-email">Email address</label>
+          <div class="signup-row">
+            <input id="signup-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+            <button class="btn" type="submit">Notify me</button>
+          </div>
+          <!-- Honeypot: hidden from people, filled in by bots. -->
+          <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAFqmSs-NEea2vYrk" data-theme="dark"></div>
+          <p class="signup-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
     <section id="faq">
       <div class="wrap prose">
         <h2>Questions</h2>
@@ -308,6 +341,45 @@
     <p>Scripture quotations from the King James Version (public domain).</p>
     <p><a href="https://www.youtube.com/@EveryVersePainted" rel="noopener">YouTube</a></p>
   </footer>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script>
+    (() => {
+      const form = document.getElementById("signup");
+      if (!form) return;
+      const status = form.querySelector(".signup-status");
+      const button = form.querySelector("button");
+      const say = (msg) => { status.textContent = msg; };
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = form.email.value.trim();
+        if (!form.email.checkValidity() || !email) { say("Please enter a valid email address."); return; }
+        const token = form.querySelector('[name="cf-turnstile-response"]')?.value;
+        if (!token) { say("Please complete the quick check above the button."); return; }
+        button.disabled = true; say("Sending…");
+        try {
+          const r = await fetch(form.dataset.endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, token, website: form.website.value }),
+          });
+          const data = await r.json().catch(() => ({}));
+          if (r.ok && data.ok) {
+            form.reset();
+            say("Almost done: check your inbox and click the link to confirm.");
+          } else if (data.error === "invalid_email") {
+            say("That email address doesn't look right. Please check it.");
+          } else {
+            say("Something went wrong. Please try again in a moment.");
+          }
+        } catch {
+          say("Something went wrong. Please try again in a moment.");
+        } finally {
+          button.disabled = false;
+          if (window.turnstile) window.turnstile.reset();
+        }
+      });
+    })();
+  </script>
   <!-- Cloudflare Web Analytics (cookieless; token is public) --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "aa22f7016ccc4566b6c836933cf4f3ea"}'></script>
 </body>
 </html>

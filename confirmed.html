@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Subscription confirmed — Every Verse Painted</title>
+  <link rel="canonical" href="https://everyversepainted.com/confirmed.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; text-align: center; padding: 2rem;
+      background: #14110f; color: #ede4d3; font-family: "EB Garamond", "Palatino Linotype", Georgia, serif; font-size: 1.2rem; }
+    h1 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: clamp(2.2rem, 6vw, 3.4rem); margin: 0 0 1rem; }
+    p { color: #b8ada0; max-width: 32rem; margin: 0.6rem auto; }
+    a { color: #f0c97c; }
+    .msg { display: none; }
+    blockquote { font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 1.5rem; color: #ede4d3; margin: 2rem auto 0; max-width: 30rem; }
+    blockquote cite { display: block; font-style: normal; font-family: "EB Garamond", Georgia, serif; font-size: 0.9rem; letter-spacing: 0.1em; color: #d4a55c; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="msg" data-status="ok">
+      <h1>You're subscribed</h1>
+      <p>Thank you. We'll email you when each new chapter of Every Verse Painted is released.</p>
+    </div>
+    <div class="msg" data-status="expired">
+      <h1>That link has expired</h1>
+      <p>Confirmation links last 48 hours. Please <a href="/#updates">sign up again</a> and we'll send a fresh one.</p>
+    </div>
+    <div class="msg" data-status="error">
+      <h1>Something went wrong</h1>
+      <p>We couldn't confirm your subscription just now. Please <a href="/#updates">try again</a> in a moment.</p>
+    </div>
+    <blockquote>&ldquo;Thy word is a lamp unto my feet, and a light unto my path.&rdquo;<cite>PSALM 119:105</cite></blockquote>
+    <p><a href="/">Return to Every Verse Painted</a></p>
+  </main>
+  <script>
+    const s = new URLSearchParams(location.search).get("status");
+    const pick = document.querySelector(`.msg[data-status="${["ok", "expired", "error"].includes(s) ? s : "ok"}"]`);
+    pick.style.display = "block";
+  </script>
+</body>
+</html>

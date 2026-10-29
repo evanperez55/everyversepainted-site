@@ -1,0 +1,17 @@
+{
+  // Email signup for everyversepainted.com: Turnstile bot check -> double opt-in via Resend.
+  // Secrets (set by Evan with `npx wrangler secret put`, never committed):
+  //   RESEND_API_KEY, TURNSTILE_SECRET, SIGNING_SECRET
+  "name": "everyversepainted-signup",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+  "vars": {
+    "SITE_ORIGIN": "https://everyversepainted.com",
+    "FROM_EMAIL": "Every Verse Painted <hello@everyversepainted.com>",
+    "RESEND_AUDIENCE_ID": "",
+    "CONFIRM_TTL_HOURS": "48"
+  }
+}
