@@ -96,6 +96,9 @@ async function turnstileOk(token, ip, env) {
     body: form,
   });
   const data = await r.json().catch(() => ({}));
+  // Cloudflare's reason codes (e.g. invalid-input-secret, timeout-or-duplicate) name the
+  // problem without exposing any key.
+  if (data.success !== true) console.warn("turnstile rejected", JSON.stringify(data["error-codes"] || []));
   return data.success === true;
 }
 
