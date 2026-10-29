@@ -11,7 +11,7 @@
   "vars": {
     "SITE_ORIGIN": "https://everyversepainted.com",
     "FROM_EMAIL": "Every Verse Painted <hello@everyversepainted.com>",
-    "RESEND_AUDIENCE_ID": "",
+    "RESEND_SEGMENT_ID": "0d28a0b9-d1f3-437c-a8e1-d715a94403db",
     "CONFIRM_TTL_HOURS": "48"
   }
 }

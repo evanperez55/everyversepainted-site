@@ -169,17 +169,28 @@ async function confirm(request, env) {
   const email = await verifyToken(url.searchParams.get("t"), env.SIGNING_SECRET);
   if (!email) return Response.redirect(`${env.SITE_ORIGIN}/confirmed.html?status=expired`, 302);
 
-  const r = await fetch(`https://api.resend.com/audiences/${env.RESEND_AUDIENCE_ID}/contacts`, {
+  // Resend keeps one contact list per account, grouped into segments (the dopamine app's
+  // waitlist is another segment). Create the contact inside our segment; if the address is
+  // already a contact, add it to our segment instead.
+  const auth = { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" };
+  const created = await fetch("https://api.resend.com/contacts", {
     method: "POST",
-    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ email, unsubscribed: false }),
+    headers: auth,
+    body: JSON.stringify({ email, unsubscribed: false, segments: [{ id: env.RESEND_SEGMENT_ID }] }),
   });
-  // 409/422 = already subscribed, which is still a success for the person clicking.
-  if (!r.ok && r.status !== 409 && r.status !== 422) {
-    console.error("resend contact add failed", r.status, await r.text());
-    return Response.redirect(`${env.SITE_ORIGIN}/confirmed.html?status=error`, 302);
+  let ok = created.ok;
+  if (!ok && (created.status === 409 || created.status === 422)) {
+    const seg = await fetch(
+      `https://api.resend.com/contacts/${encodeURIComponent(email)}/segments/${env.RESEND_SEGMENT_ID}`,
+      { method: "POST", headers: auth },
+    );
+    // Already in the segment also counts as success for the person clicking.
+    ok = seg.ok || seg.status === 409 || seg.status === 422;
+    if (!ok) console.error("resend segment add failed", seg.status, await seg.text());
+  } else if (!ok) {
+    console.error("resend contact create failed", created.status, await created.text());
   }
-  return Response.redirect(`${env.SITE_ORIGIN}/confirmed.html?status=ok`, 302);
+  return Response.redirect(`${env.SITE_ORIGIN}/confirmed.html?status=${ok ? "ok" : "error"}`, 302);
 }
 
 export default {
